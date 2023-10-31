@@ -1,4 +1,4 @@
-# Noro_nf
+# norovirus-blast-nf
 
 Nextflow pipeline to run blast for norovirus
 
