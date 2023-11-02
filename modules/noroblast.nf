@@ -13,7 +13,11 @@ process seq_qc {
     tuple val(sample_id), path("${sample_id}_seq_qc.csv")
 
     script:
+    sample_id = seq.id
     """
+    echo ">${sample_id}" > ${sample_id}.fa
+    echo "${seq.seqString}" >> ${sample_id}.fa
+
     seq_qc.py -i ${seq} --sample-id ${sample_id} > ${sample_id}_seq_qc.csv
     """
 }
@@ -34,7 +38,11 @@ process blastn {
     tuple val(sample_id), path("${sample_id}_blast_results.tsv"), emit: blast_report, optional:true
     
     script:
+    sample_id = seq.id
     """
+    echo ">${sample_id}" > ${sample_id}.fa
+    echo "${seq.seqString}" >> ${sample_id}.fa
+
     echo "query_seq_id,subject_seq_id,subject_strand,query_length,query_start,query_end,subject_length,subject_start,subject_end,alignment_length,percent_identity,percent_coverage,num_mismatch,num_gaps,e_value,bitscore" > ${sample_id}_blast.csv
 
     blastn \
