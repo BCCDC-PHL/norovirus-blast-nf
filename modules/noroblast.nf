@@ -18,7 +18,7 @@ process seq_qc {
     echo ">${sample_id}" > ${sample_id}.fa
     echo "${seq.seqString}" >> ${sample_id}.fa
 
-    seq_qc.py -i ${seq} --sample-id ${sample_id} > ${sample_id}_seq_qc.csv
+    seq_qc.py -i ${sample_id}.fa --sample-id ${sample_id} > ${sample_id}_seq_qc.csv
     """
 }
 
@@ -50,7 +50,7 @@ process blastn {
 	-num_threads ${task.cpus} \
 	-perc_identity ${params.minid} \
 	-qcov_hsp_perc ${params.mincov} \
-	-query ${seq} \
+	-query ${sample_id}.fa \
 	-outfmt "6 qseqid saccver sstrand qlen qstart qend slen sstart send length pident qcovhsp mismatch gaps evalue bitscore" \
 	| tr \$"\\t" "," >> ${sample_id}_blast.csv
 
