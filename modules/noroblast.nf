@@ -54,7 +54,7 @@ process blastn {
 	-outfmt "6 qseqid saccver sstrand qlen qstart qend slen sstart send length pident qcovhsp mismatch gaps evalue bitscore" \
 	| tr \$"\\t" "," >> ${sample_id}_blast.csv
 
-    parse_blast_output.py -i ${sample_id}_blast.csv > ${sample_id}_blast_results.tsv
+    parse_blast_output.py -i ${sample_id}_blast.csv --db-metadata ${db}/metadata.json > ${sample_id}_blast_results.tsv
     """
 }
 

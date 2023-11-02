@@ -30,6 +30,20 @@ def parse_blast_output(blast_output):
 
 def main(args):
     blast_results = parse_blast_output(args.input)
+
+    db_metadata = {}
+    if os.path.exists(args.db_metadata):
+        try:
+            with open(args.db_metadata, 'r') as f:
+                db_metadata = json.load(f)
+        except Exception as e:
+            pass
+
+    for row in blast_results:
+        row['db_name'] = db_metadata.get('db_name', None)
+        row['db_version'] = db_metadata.get('version', None)
+        row['db_date'] = db_metadata.get('date', None)
+    
     writer = csv.DictWriter(sys.stdout, fieldnames=blast_results[0].keys(), dialect='excel-tab')
     writer.writeheader()
     for row in blast_results:
@@ -39,5 +53,6 @@ def main(args):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('-i', '--input')
+    parser.add_argument('-m', '--db-metadata')
     args = parser.parse_args()
     main(args)
