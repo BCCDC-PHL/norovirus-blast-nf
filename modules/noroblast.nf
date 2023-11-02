@@ -39,7 +39,7 @@ process blastn {
     
     script:
     sample_id = seq.id
-    db_metadata = params.collect_db_metadata ? "--db-metadata ${db}/metadata.json" : db_metadata = ""
+    def db_metadata = params.collect_db_metadata ? "--db-metadata ${db}/metadata.json" : ""
     """
     echo ">${sample_id}" > ${sample_id}.fa
     echo "${seq.seqString}" >> ${sample_id}.fa
