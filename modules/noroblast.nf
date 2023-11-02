@@ -39,6 +39,7 @@ process blastn {
     
     script:
     sample_id = seq.id
+    params.collect_db_metadata ? db_metadata = "--db-metadata ${db}/metadata.json" : db_metadata = ""
     """
     echo ">${sample_id}" > ${sample_id}.fa
     echo "${seq.seqString}" >> ${sample_id}.fa
@@ -54,7 +55,7 @@ process blastn {
 	-outfmt "6 qseqid saccver sstrand qlen qstart qend slen sstart send length pident qcovhsp mismatch gaps evalue bitscore" \
 	| tr \$"\\t" "," >> ${sample_id}_blast.csv
 
-    parse_blast_output.py -i ${sample_id}_blast.csv --db-metadata ${db}/metadata.json > ${sample_id}_blast_results.tsv
+    parse_blast_output.py -i ${sample_id}_blast.csv ${db_metadata} > ${sample_id}_blast_results.tsv
     """
 }
 
