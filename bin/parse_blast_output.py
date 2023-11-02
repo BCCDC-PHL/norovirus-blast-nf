@@ -41,7 +41,7 @@ def main(args):
             pass
 
     for row in blast_results:
-        row['db_name'] = db_metadata.get('db_name', None)
+        row['db_name'] = db_metadata.get('dbname', None)
         row['db_version'] = db_metadata.get('version', None)
         row['db_date'] = db_metadata.get('date', None)
     
