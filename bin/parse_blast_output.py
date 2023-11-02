@@ -3,6 +3,7 @@
 import argparse
 import csv
 import json
+import os
 import sys
 
 def parse_blast_output(blast_output):
