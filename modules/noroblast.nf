@@ -7,7 +7,7 @@ process seq_qc {
     publishDir "${params.outdir}/${sample_id}", mode: 'copy', pattern: "${sample_id}_seq_qc.csv"
 
     input:
-    tuple val(sample_id), path(seq)
+    val(seq)
 
     output:
     tuple val(sample_id), path("${sample_id}_seq_qc.csv")
@@ -32,7 +32,7 @@ process blastn {
     publishDir "${params.outdir}/${sample_id}", mode: 'copy', pattern: "${sample_id}*"
 
     input:
-    tuple val(sample_id), path(seq), path(db)
+    val(seq), path(db)
 
     output:
     tuple val(sample_id), path("${sample_id}_blast_results.tsv"), emit: blast_report, optional:true
