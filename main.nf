@@ -22,7 +22,7 @@ include { find_top_results } from './modules/noroblast.nf'
 
 workflow{
     ch_db = Channel.fromPath(params.db)
-    ch_fasta = Channel.fromPath(params.fasta_search_path).map{ it -> [it.name.split('\\.')[0], it] }
+    ch_fasta = Channel.fromPath(params.fasta_search_path)
     ch_seqs = ch_fasta.splitFasta(record: [id: true, seqString: true])
 
     seq_qc(ch_seqs)
