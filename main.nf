@@ -7,24 +7,13 @@ include { seq_qc }           from './modules/noroblast.nf'
 include { blastn }           from './modules/noroblast.nf'
 include { find_top_results } from './modules/noroblast.nf'
 
-// prints to the screen and to the log
-        log.info """
-
-                 Noroblast Pipeline
-                 ===================================
-                 projectDir    : ${projectDir}
-                 launchDir     : ${launchDir}
-                 database      : ${params.db}
-                 fasta_input   : ${params.fasta_input}
-                 outdir        : ${params.outdir}
-                 """
-                 .stripIndent()
 
 workflow{
     ch_db = Channel.fromPath(params.db)
     ch_fasta = Channel.fromPath(params.fasta_search_path)
     ch_seqs = ch_fasta.splitFasta(record: [id: true, seqString: true])
 
+    main:
     seq_qc(ch_seqs)
     ch_blast = blastn(ch_seqs.combine(ch_db))
     find_top_results(ch_blast)
