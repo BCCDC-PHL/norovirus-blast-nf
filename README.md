@@ -12,5 +12,5 @@ Note the `-profile` and `--cache` switches, essential for proper operation of Co
 
 Example command:
 ```
-nextflow run BCCDC-PHL/norovirus-blast-nf --db <path/to/ref.fa> --fastq_input <path/to/input/fasta> --outdir <output_folder> -profile conda --cache ~/.conda/envs
+nextflow run BCCDC-PHL/norovirus-blast-nf --db <path/to/ref.fa> --fasta_input <path/to/input/fasta> --outdir <output_folder> -profile conda --cache ~/.conda/envs
 ```
