@@ -24,4 +24,7 @@ workflow{
     
     noroblast(ch_fasta_input.combine(ch_db))
 
+    noroblast.out.top10.map{it -> it[1]}.collectFile(name: "${params.outdir}/collect_blast_result_top10.csv", skip: 1, keepHeader: true)
+    noroblast.out.top1.map{it -> it[1]}.collectFile(name: "${params.outdir}/collect_blast_result_top1.csv", skip: 1, keepHeader: true)
+
 }

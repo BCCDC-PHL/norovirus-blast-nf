@@ -10,8 +10,9 @@ process noroblast {
     tuple val(sample_id), path(sequences), path(ref)
 
     output:
-    tuple val(sample_id), path("${sample_id}/${sample_id}*.csv"), emit: parsed_results, optional: true
-    tuple val(sample_id), path("${sample_id}/${sample_id}_blast_results.tsv"), emit: blast_report, optional: true
+    tuple val(sample_id), path("${sample_id}/${sample_id}_blast_results.tsv")       , emit: blast_report, optional: true
+    tuple val(sample_id), path("${sample_id}/${sample_id}*_top10_*.csv")            , emit: top10, optional: true
+    tuple val(sample_id), path("${sample_id}/${sample_id}*_top1_*.csv")             , emit: top1, optional: true
     tuple val(sample_id), path("${sample_id}/logs"), emit: logs
 
     """
