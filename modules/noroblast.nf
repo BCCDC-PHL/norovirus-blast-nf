@@ -7,7 +7,7 @@ process noroblast {
 
 
     input:
-    tuple val(sample_id), path(reads), path(ref)
+    tuple val(sample_id), path(sequences), path(ref)
 
     output:
     tuple val(sample_id), path("${sample_id}/${sample_id}*.csv"), emit: parsed_results, optional: true
@@ -15,7 +15,7 @@ process noroblast {
     tuple val(sample_id), path("${sample_id}/logs"), emit: logs
 
     """
-    noroblast.py --input ${reads} -o ${sample_id} --db ${ref}
+    noroblast.py --input ${sequences} -o ${sample_id} --db ${ref}
 
     """
 
