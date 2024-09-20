@@ -3,7 +3,7 @@ process noroblast {
     tag {sample_id}
 
     publishDir "${params.outdir}/${sample_id}", pattern: "${sample_id}/${sample_id}*", mode:'copy', saveAs: { filename -> filename.split("/").last() }
-    publishDir "${params.outdir}/${sample_id}", pattern: "${sample_id}/logs", mode:'copy'
+    publishDir "${params.outdir}/${sample_id}", pattern: "${sample_id}/logs", mode:'copy', saveAs: { filename -> filename.split("/").last() }
 
 
     input:
