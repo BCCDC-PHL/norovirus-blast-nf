@@ -7,7 +7,7 @@ def split_blast_df(input_file, output_prefix, regions, dupl_columns, sort_column
 
     todaydate = datetime.today().strftime('%Y-%m-%d')
 
-    blast_results = pd.read_csv(input_file, index_col=0)
+    blast_results = pd.read_csv(input_file)
     blast_results = blast_results.drop_duplicates(subset=dupl_columns, keep="first")
 
     #order by query id

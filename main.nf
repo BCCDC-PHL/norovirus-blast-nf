@@ -27,8 +27,8 @@ workflow{
     
     noroblast(ch_fasta_input.combine(ch_db))
 
-    ch_blast_collect_top1 = noroblast.out.top1.map{it -> it[1]}.collectFile(name: "${params.outdir}/${params.run_name}_top1_combined_blast.csv", skip: 1, keepHeader: true)
-    ch_blast_collect_top10 = noroblast.out.top10.map{it -> it[1]}.collectFile(name: "${params.outdir}/${params.run_name}_top10_combined_blast.csv", skip: 1, keepHeader: true)
+    ch_blast_collect_top1 = noroblast.out.top1.map{it -> it[1]}.collectFile(name: "${params.outdir}/${params.run_name}_top1_combined_blast.csv", sort: {file -> file.text}, skip: 1, keepHeader: true)
+    ch_blast_collect_top10 = noroblast.out.top10.map{it -> it[1]}.collectFile(name: "${params.outdir}/${params.run_name}_top10_combined_blast.csv", sort: {file -> file.text}, skip: 1, keepHeader: true)
 
     split_blast_outputs(ch_blast_collect_top1, ch_blast_collect_top10 )
 

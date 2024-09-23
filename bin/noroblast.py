@@ -99,7 +99,7 @@ def parse_alignments(output, blast_out):
     #drop duplicates for same seg, although subject id is different.
     #blast_results1 = blast_results1.drop_duplicates(subset=['Query Id','Bit Score','Region','Seg'])
     outfile = os.path.join(output,output + '_top1_blast_results.csv')
-    blast_results1.to_csv(outfile)
+    blast_results1.to_csv(outfile, index=False)
 
   
     top10_bitscores = blast_results[['Query Id','Region', 'Bit Score']].groupby(['Query Id','Region']).head(10)
@@ -109,7 +109,7 @@ def parse_alignments(output, blast_out):
     #blast_results1 = blast_results1.drop_duplicates(subset=['Query Id','Bit Score','Region','Seg'])
 
     outfile_10 = os.path.join(output,output + '_top10_blast_results.csv')
-    blast_results1.to_csv(outfile_10)
+    blast_results1.to_csv(outfile_10, index=False)
 
     #regionB = blast_results1[blast_results1['Region']=="RegionB"]
     #regionC = blast_results1[blast_results1['Region']=="RegionC"]
